@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RentATeamTest</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="about_text">Тестовое задание для Rentateam</string>
+    <string name="users_menu_item">Users</string>
+    <string name="about_menu_item">About</string>
+</resources>

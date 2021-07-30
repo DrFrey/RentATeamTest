@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.example.rentateamtest.data.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/user_avatar"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{user.avatar}" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/first_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="5dp"
+            android:text="@{user.firstName}"
+            app:layout_constraintStart_toEndOf="@id/user_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/user_avatar"
+            tools:text="Name" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/last_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingStart="10dp"
+            android:paddingBottom="5dp"
+            android:text="@{user.lastName}"
+            app:layout_constraintStart_toEndOf="@id/user_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/first_name_tv"
+            tools:text="Surname" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/email_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="10dp"
+            android:text="@{user.email}"
+            app:layout_constraintStart_toEndOf="@id/user_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/last_name_tv"
+            tools:text="Email" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
