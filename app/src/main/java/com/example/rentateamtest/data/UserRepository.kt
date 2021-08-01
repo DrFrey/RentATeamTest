@@ -4,32 +4,35 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import com.example.rentateamtest.TestApplication
 import com.example.rentateamtest.TestService
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
+import java.lang.Exception
 
 class UserRepository(private val userDao: UserDao) {
 
+    var error = ""
 
     fun getUsers(): Observable<List<User>> {
-        return Observable.concatArrayEager(
-            userDao.getUsersFromDb().subscribeOn(Schedulers.io()),
+        return Observable.concatArray(
             Observable.defer {
                 if (isInternetAvailable()) {
                     TestService.retrofitService.getUsers()
-                        .subscribeOn(Schedulers.io())
-                        .map {
-                            res -> res.data
+                        .map { res ->
+                            res.data
                         }
                         .flatMap { l ->
                             userDao.deleteAll()
                                 .andThen(userDao.insertAll(l))
-                                .toObservable<List<User>>()
+                                .toObservable()
                         }
-                } else
+                } else {
+                    error = "No internet. Please check your connection."
                     Observable.empty()
-            }.subscribeOn(Schedulers.io())
+                }
+            },
+            userDao.getUsersFromDb()
         )
     }
 
